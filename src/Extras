@@ -1,0 +1,14 @@
+    public enum Criteria {
+        SUPPORT, CONFIDENCE;
+    }
+    
+    Criteria criteria;
+    double criteriaValue;
+    
+    public void setCriteri(Criteria criteria) {
+        this.criteria = criteria;
+    }
+    
+    public void setCriteriaValue(int criteriaValue) {
+        this.criteriaValue = criteriaValue;
+    }
