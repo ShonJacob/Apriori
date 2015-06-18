@@ -2,7 +2,14 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 
-
+/**
+ * 
+ * @author Vedavyas
+ * 
+ * Class used to convert Weka's rules into format used in this project.
+ * This is purely for verification of the algorithm
+ *
+ */
 public class WekaRuleExtract {
 
     public static void main(String[] args) throws Exception {
