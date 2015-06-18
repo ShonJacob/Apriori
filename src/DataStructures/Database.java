@@ -23,19 +23,20 @@ public class Database {
         private static final String ATTRIBUTE_DELIMITER = ",";
         public List<Instance> instances;
         
-        public Row(String line) throws Exception {
+        public Row(String line, int number) throws Exception {
             instances = new ArrayList<Instance>();
-            createRow(line);
+            createRow(line, number);
         }
         
         public boolean contains(Item item) {
             return this.instances.containsAll(item.instances);
         }
         
-        private void createRow(String line) throws Exception {
+        private void createRow(String line, int number) throws Exception {
             String[] lineValues = line.split(ATTRIBUTE_DELIMITER);
             if (lineValues.length != attributes.size()) {
-                throw new Exception("Invalid number of instances in row "+line);
+                throw new Exception("LINE "+number+": Invalid number of instances: "+lineValues.length
+                        +" in row ["+line+"]. Expected: "+attributes.size());
             }
             for (int i=0; i<lineValues.length; i++) {
                 if (attributes.get(i).canHaveValue(lineValues[i])) {
@@ -134,9 +135,9 @@ public class Database {
     
     private void readData(BufferedReader br) throws Exception {
         String line;
-        
+        int count = 0;
         while ((line=br.readLine()) != null) {
-            this.rows.add(new Row(line));
+            this.rows.add(new Row(line, ++count));
         }
     }
     

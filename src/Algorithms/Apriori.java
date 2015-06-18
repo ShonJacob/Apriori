@@ -185,9 +185,6 @@ public class Apriori {
         this.consequentInstances =  new HashSet<>();
         this.consequentInstances.add(new Instance(this.database.classLabel, "0"));
         this.consequentInstances.add(new Instance(this.database.classLabel, "1"));
-        this.consequentInstances.add(new Instance(this.database.classLabel, "2"));
-        this.consequentInstances.add(new Instance(this.database.classLabel, "3"));
-        this.consequentInstances.add(new Instance(this.database.classLabel, "4"));
     }
     
     /**
@@ -263,14 +260,13 @@ public class Apriori {
     }
     
     /**
-     * A function which prunes the candidateItemSet and adds all it's elements to frequentItemSet
+     * A function which prunes the candidateItemSet and adds all its elements to frequentItemSet
      */
     private void prune() {
         this.candidateItemSet.removeIf(item -> item.count < this.minSupportCount);
         this.frequentItemSet.addAll(this.candidateItemSet);
-        System.out.println("FREQUENT ITEMSET IS NOW: ");
-        this.frequentItemSet.forEach(item -> log(item));
-        log("\n\n\n");
+        //log("FREQ ITEMSET IS NOW: "+this.frequentItemSet);
+        
     }
     
     /**
@@ -333,20 +329,6 @@ public class Apriori {
     }
     
     /**
-     * Function which filters the ruleset. Criteria:
-     * 1. Consequent of the rule must contain the class label
-     *
-    private void filterRules() throws Exception {
-        Instance in = new Instance(this.database.classLabel, "1");
-        for (Rule rule: this.rules) {
-            if (rule.consequent.instances.contains(in)) {
-                System.out.println(rule);
-            }
-        }
-    }
-    */
-    
-    /**
      * Utility function to log messages to the console
      * @param message Message to be logged
      */
@@ -387,14 +369,17 @@ public class Apriori {
         prune();
         log("DONE!\n\n");
         
-        log("GENERATING FREQUENT ITEMSETS...");
+        log("GENERATING FREQUENT ITEMSETS...\n=======================");
         while (this.candidateItemSet.size() != 0) {
+            log("GENERATING NEXT ITEMSET...");
             generateNextLevelItemset();
+            log("CALCULATING SUPPPORTS...");
             calculateSupport();
+            log("PRUNING...\n");
             prune();
-            //alternatePrune();
         }
         
+        log("FILTERING FREQUENT ITEMSETS...");
         filterFrequentItemset();
         log("GENERATED "+this.frequentItemSet.size()+" FREQUENT ITEMS!\n\n");
         //this.frequentItemSet.forEach(itemset -> log(itemset));
