@@ -1,0 +1,7 @@
+Since this is a Java project, you can import it into Eclipse.
+You can run the project with the java command:
+
+java -jar AssociationRuleMiner.jar <filename>
+
+where filename is the (full or relative) path of the ARFF file.
+NOTE: The ARFF file must have nominalized values ONLY.
