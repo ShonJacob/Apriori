@@ -5,3 +5,4 @@ java -jar AssociationRuleMiner.jar <filename>
 
 where filename is the (full or relative) path of the ARFF file.
 NOTE: The ARFF file must have nominalized values ONLY.
+Normailzation means to bring the values to scale so that one feature does not outweigh the other
